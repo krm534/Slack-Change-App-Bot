@@ -1,28 +1,21 @@
 # Slackbot Documentation
-> Node.js app that acts as a Slack bot
+> Node.js app that acts as a Slack bot for generating the fewest amount of change for a dollar input value
+
 ### Steps
 ---
-1. This project assumes you have prior Node.js/JavaScript experience. To learn more go [here](https://nodejs.org/en/docs/guides/).
-2. Download the project onto your machine.
-3. Navigate to project location via Node.js command line and run
-```bash
-	npm i 
-``` 
-to install all the node_modules for the dependencies.
-4. Create a .env file to store an environment variable named OAUTH_BOT_TOKEN which will contain the bot's oauth token (sent in email). Click [here](https://www.npmjs.com/package/dotenv) to learn more about .env files.
-5. Start a ngrok connection by running 
-```bash
-   ngrok http 80
-```
-in another Node.js command line terminal. So, there should be two terminals open. Learn more about ngrok [here](https://ngrok.com/docs).
-6. Navigate to [here](https://api.slack.com/apps). Log in to the dev account and select coin-change-app. 
-7. Choose **Slash Commands** from the options listed. There should be two slash commands (change and receipt).
-8. Click edit on the __change__ slash command.
-9. Change the Request URL input field to your ngrok forwarding https URL.The input field should like *ngrokURL/slack/change*.
-10. Change the input field of the __receipt__ slash command to *ngrokURL/slack/receipt*.
-11. Run the application in the Node.js command line terminal that is not running ngrok.
-```bash
-   node index.js
-```
-12. Run one of the Slack slash commands in the Slack channel called Coin-Change-Bot.
-13. The bot should work at this point.
+1. Ngrok was used to test since Slack needs to access a public service to issue Slack commands to.
+2. If using Ngrok, see the Ngrok Setup section
+3. Navigate to Slack API [here](https://api.slack.com/apps). Log into the workspace you are using and create a new application.
+4. Choose **Slash Commands** from the options listed under your new application. Create a new command called change.
+5. Click edit on the new slash command.
+6. Change the Request URL input field to generated Ngrok forwarding https URL if using Ngrok.The input field should be similar to ```<ngrok_url>/slack/change```.
+7. If not using Ngrok, set the Request URL to whatever address your application is hosted at in the public domain.
+8. Configure the application environment variables to the correct OAUTH_BOT_TOKEN and CHANNEL_ID for your new Slack application.
+9. Finally, run the application: ```node index.js```.
+10. Test by issuing the command ```/change .50``` in the correct Slack channel that corresponds to the application. The bot should respond with 2 quarters being the fewest amount of change.
+
+### Ngrok Setup
+1. Start a ngrok connection by running: ```ngrok http 1300```.
+You need an Ngrok account to use it but it is free.
+Learn more about ngrok [here](https://ngrok.com/docs).
+2. Ngrok is basically used to give users public domain URLs that tunnel to user local machines for testing with services like Slack APIs.
