@@ -11,12 +11,12 @@ app.use(body_parser.json());
 app.use(body_parser.urlencoded({ extended: true }));
 
 // Variables
-const PORT = 80;
+const PORT = 1300;
 
 // Application content
-app.use('/slack',slack);
+app.use('/slack', slack);
 
 // Listen on port number
-app.listen(process.env.PORT || PORT, () => {
+app.listen(process.env.PORT || PORT, '0.0.0.0', () => {
     console.log(`Listening on port ${PORT}`);
 });
